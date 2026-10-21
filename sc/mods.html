@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OKAOs - Mods</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link class="mcpixel-logo-ref" rel="icon" type="image/jpg" href="../img/logo.jpg">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/play.css">
+    <link rel="stylesheet" href="../css/mods.css">
+    <script src="../js/mods.js" data-page="mods" data-scripts="ui,okx,songs,modspage"></script>
+</head>
+<body class="mods-page" oncontextmenu="return false;">
+
+    <img id="modBgArt" class="bg-layer sharp" alt="">
+    <video id="modBgVideo" class="bg-layer sharp" loop muted playsinline></video>
+    <div class="bg-shade mods-shade"></div>
+
+    <header class="topbar">
+        <div class="brand">OKAOs</div>
+        <nav class="menu" id="filterMenu">
+            <a href="../index.html" class="menu-btn menu-btn-home" id="homeBtn"><i data-ic="home"></i>Inicio</a>
+            <span class="menu-btn active" data-filter="all">Todos</span>
+            <span class="menu-btn" data-filter="on">Activos</span>
+            <span class="menu-btn" data-filter="off">Desactivados</span>
+            <button type="button" class="menu-btn menu-btn-add" id="btnHowTo"><i data-ic="plus"></i>Instalar</button>
+        </nav>
+    </header>
+
+    <main class="layout">
+        <section class="tracks-section" id="rightPanel" aria-label="Lista de mods"></section>
+
+        <section class="disc-section">
+            <div class="song-heading">
+                <div class="song-heading-name" id="headName">Mods</div>
+                <div class="song-heading-author" id="headAuthor">Selecciona un mod</div>
+            </div>
+
+            <div class="art-card-wrap">
+                <div class="art-card" id="disc">
+                    <div class="art-grooves"></div>
+                    <img id="discArt" src="../img/assets/mechanics/mod.svg" alt="">
+                    <div class="art-hole"></div>
+                </div>
+                <div class="art-tag" id="statusTag">--</div>
+            </div>
+
+            <div class="quick-info-bar">
+                <div class="quick-info-item"><span>Canciones</span><b id="quickSongs">--</b></div>
+                <div class="quick-info-item"><span>Versión</span><b id="quickVersion">--</b></div>
+            </div>
+
+            <div class="mech-box" id="mechBox" hidden>
+                <div class="mech-title">Mecánicas</div>
+                <div class="mech-list" id="mechList"></div>
+                <div class="mech-desc" id="mechDesc"></div>
+            </div>
+
+            <div class="action-buttons-group">
+                <button type="button" id="btnModInfo" class="action-sub-btn" disabled><i data-ic="info"></i>Información</button>
+                <button type="button" id="btnModSongs" class="action-sub-btn" disabled><i data-ic="music"></i>Canciones</button>
+            </div>
+
+            <button type="button" class="play-btn" id="btnToggle" disabled><i data-ic="power"></i><span id="toggleText">Activar</span></button>
+        </section>
+    </main>
+
+    <!-- Información del mod -->
+    <div class="modal-backdrop" id="infoModal">
+        <div class="modal mod-modal">
+            <button type="button" class="modal-x" id="infoClose" aria-label="Cerrar"><i data-ic="close"></i></button>
+            <div class="mod-modal-head">
+                <img id="infoCover" src="" alt="">
+                <div>
+                    <h3 id="infoName"></h3>
+                    <p id="infoAuthor"></p>
+                    <div class="mod-tags" id="infoTags"></div>
+                </div>
+            </div>
+            <p class="mod-modal-desc" id="infoDesc"></p>
+            <div class="mod-facts" id="infoFacts"></div>
+            <h4>Mecánicas</h4>
+            <div class="mech-cards" id="infoMech"></div>
+            <h4>Canciones del mod</h4>
+            <div class="mod-songs" id="infoSongs"></div>
+            <div id="infoNotesWrap" hidden>
+                <h4>Notas de versión</h4>
+                <ul class="mod-notes" id="infoNotes"></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cómo instalar un mod -->
+    <div class="modal-backdrop" id="howModal">
+        <div class="modal mod-modal">
+            <button type="button" class="modal-x" id="howClose" aria-label="Cerrar"><i data-ic="close"></i></button>
+            <h3 class="how-title">Instalar un mod</h3>
+            <p class="mod-modal-desc">Cada mod vive en su propia carpeta dentro de <b>mods/</b>. Copia la carpeta, añade su nombre a <b>mods/index.json</b> (o deja que se detecte sola si usas el servidor incluido) y recarga esta pantalla.</p>
+            <pre class="tree">OKAOs/
+└─ mods/
+   ├─ index.json          lista de mods:  { "mods": ["mi-mod"] }
+   └─ mi-mod/
+      ├─ index.json       datos del mod (obligatorio)
+      ├─ assets/          portada, fondo, video, música de fondo
+      ├─ musica/          mapas .oks y su audio en assets/
+      ├─ scripts/         mecánicas nuevas (.js)
+      ├─ css/             estilos extra
+      └─ img/  sounds/    reemplazan archivos del juego</pre>
+            <p class="mod-modal-desc">Los mapas en formato <b>.okx</b> no son mods: súbelos desde <a href="music.html">Canciones</a>.</p>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+</body>
+</html>

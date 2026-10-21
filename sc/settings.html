@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OKAOs - Ajustes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link class="mcpixel-logo-ref" rel="icon" type="image/jpg" href="../img/logo.jpg">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/settings.css">
+    <script src="../js/mods.js" data-page="settings" data-scripts="ui,settings"></script>
+</head>
+<body oncontextmenu="return false;">
+
+    <img class="bg-layer show" src="../img/fn/f6.jpg" alt="">
+    <div class="bg-shade"></div>
+
+    <header class="topbar">
+        <a href="../index.html" class="brand">OKAOs</a>
+        <nav class="menu" id="tabs" aria-label="Categorías de ajustes">
+            <a href="../index.html" class="menu-btn menu-btn-home" id="homeLink"><i data-ic="home"></i><span id="homeText">Inicio</span></a>
+            <button type="button" class="menu-btn active" data-tab="juego"><i data-ic="gamepad"></i>Juego</button>
+            <button type="button" class="menu-btn" data-tab="notas"><i data-ic="palette"></i>Notas</button>
+            <button type="button" class="menu-btn" data-tab="atajos"><i data-ic="bolt"></i>Atajos</button>
+            <button type="button" class="menu-btn" data-tab="audio"><i data-ic="volume"></i>Audio</button>
+            <button type="button" class="menu-btn" data-tab="tactil"><i data-ic="target"></i>Táctil</button>
+            <button type="button" class="menu-btn" data-tab="sistema"><i data-ic="sliders"></i>Sistema</button>
+        </nav>
+    </header>
+
+    <main class="layout">
+        <section class="settings-col" id="settingsCol">
+
+            <!-- ============ JUEGO ============ -->
+            <div class="pane active" id="pane-juego">
+                <h2 class="pane-title">Juego</h2>
+
+                <div class="row">
+                    <div class="row-text"><span class="row-label">Teclas de las pistas</span><span class="row-desc">Haz clic en una tecla y pulsa la nueva. Esc cancela.</span></div>
+                    <div class="keys" id="keysGrid">
+                        <button type="button" class="keycap" data-lane="1" style="--lane:var(--lane-0)"><span class="keycap-lane">Pista 1</span><span class="keycap-val" id="key1"></span></button>
+                        <button type="button" class="keycap" data-lane="2" style="--lane:var(--lane-1)"><span class="keycap-lane">Pista 2</span><span class="keycap-val" id="key2"></span></button>
+                        <button type="button" class="keycap" data-lane="3" style="--lane:var(--lane-2)"><span class="keycap-lane">Pista 3</span><span class="keycap-val" id="key3"></span></button>
+                        <button type="button" class="keycap" data-lane="4" style="--lane:var(--lane-3)"><span class="keycap-lane">Pista 4</span><span class="keycap-val" id="key4"></span></button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="row-text"><span class="row-label">Velocidad personalizada</span><span class="row-desc">Ignora la velocidad que define cada mapa.</span></div>
+                    <button type="button" class="switch" data-g="toggles" data-k="btnCustomSpeed" role="switch" aria-label="Velocidad personalizada"></button>
+                </div>
+
+                <div class="row" id="rowSpeed">
+                    <div class="row-text"><span class="row-label">Velocidad de caída</span><span class="row-desc">Más alta = las notas llegan más rápido.</span></div>
+                    <div class="row-ctl"><input type="range" class="range" data-g="sliders" data-k="arrowSpeed" min="1" max="10" step="0.1" data-fmt="x1"><output></output></div>
+                </div>
+
+                <div class="row">
+                    <div class="row-text"><span class="row-label">Posición de los receptores</span><span class="row-desc">Arriba: las notas suben. Abajo: las notas caen.</span></div>
+                    <div class="seg" data-g="toggles" data-k="btnArrowPos" data-bool>
+                        <button type="button" data-val="false">Arriba</button>
+                        <button type="button" data-val="true">Abajo</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="row-text"><span class="row-label">Desfase de audio</span><span class="row-desc">Ajusta la sincronía si notas retraso (ms).</span></div>
+                    <div class="row-ctl"><input type="range" class="range" data-g="sliders" data-k="offset" min="-150" max="150" step="5" data-fmt="ms"><output></output></div>
+                </div>
+            </div>
+
+            <!-- ============ NOTAS ============ -->
+            <div class="pane" id="pane-notas">
+                <h2 class="pane-title">Estilo de las notas</h2>
+
+                <div class="style-cards" id="styleCards" role="radiogroup" aria-label="Estilo de las notas">
+                    <button type="button" class="style-card" data-style="arrows" role="radio">
+                        <span class="style-glyph"><i data-ic="note-arrow"></i></span>
+                        <span class="style-name">Flechas</span>
+                        <span class="style-desc">El clásico. Apuntan hacia su pista.</span>
+                    </button>
+                    <button type="button" class="style-card" data-style="circles" role="radio">
+                        <span class="style-glyph"><i data-ic="note-circle"></i></span>
+                        <span class="style-name">Círculos</span>
+                        <span class="style-desc">Limpios y fáciles de leer a alta velocidad.</span>
+                    </button>
+                    <button type="button" class="style-card" data-style="bars" role="radio">
+                        <span class="style-glyph"><i data-ic="note-bar"></i></span>
+                        <span class="style-name">Barras</span>
+                        <span class="style-desc">Anchas, como en los juegos de teclas.</span>
+                    </button>
+                </div>
+
+                <div class="row">
+                    <div class="row-text"><span class="row-label">Tamaño de las notas</span><span class="row-desc">Escala las notas y los receptores.</span></div>
+                    <div class="row-ctl"><input type="range" class="range" data-g="sliders" data-k="noteSize" min="60" max="140" step="5" data-fmt="pct"><output></output></div>
+                </div>
+
+                <div class="row">
+                    <div class="row-text"><span class="row-label">Oscurecer el carril</span><span class="row-desc">Aumenta el contraste detrás de las notas.</span></div>
+                    <div class="row-ctl"><input type="range" class="range" data-g="sliders" data-k="laneOpacity" min="0" max="100" step="5" data-fmt="pct"><output></output></div>
+                </div>
+
+                <div class="row">
+                    <div class="row-text"><span class="row-label">Líneas guía</span><span class="row-desc">Muestra los bordes del carril.</span></div>
+                    <button type="button" class="switch" data-g="toggles" data-k="btnLines" role="switch" aria-label="Líneas guía"></button>
+                </div>
+
+                <div class="row">
+                    <div class="row-text"><span class="row-label">Destellos y brillo</span><span class="row-desc">Efectos de luz al acertar.</span></div>
+                    <button type="button" class="switch" data-g="toggles" data-k="btnFX" role="switch" aria-label="Destellos"></button>
+                </div>
+            </div>
+
+            <!-- ============ ATAJOS ============ -->
+            <div class="pane" id="pane-atajos">
+                <h2 class="pane-title">Atajos</h2>
+                <p class="pane-note">Teclas rápidas para pausar y moverte entre pantallas. Haz clic en una y pulsa la nueva. Retroceso restablece la tecla por defecto.</p>
+                <div id="shortcutList" class="shortcut-list"></div>
+                <div class="row">
+                    <div class="row-text"><span class="row-label">Restablecer atajos</span><span class="row-desc">Vuelve a Esc, H, Enter, C, M, P, S y T.</span></div>
+                    <button type="button" class="btn" id="btnResetShortcuts"><i data-ic="refresh"></i>Restablecer</button>
+                </div>
+            </div>
+
+            <!-- ============ AUDIO ============ -->
+            <div class="pane" id="pane-audio">
+                <h2 class="pane-title">Audio</h2>
+                <div class="row">
+                    <div class="row-text"><span class="row-label">Volumen general</span><span class="row-desc">Nivel máximo de todo el sonido.</span></div>
+                    <div class="row-ctl"><input type="range" class="range" data-g="sliders" data-k="masterVol" min="0" max="100" data-fmt="pct"><output></output></div>
+                </div>
+                <div class="row">
+                    <div class="row-text"><span class="row-label">Música</span><span class="row-desc">Volumen de las canciones.</span></div>
+                    <div class="row-ctl"><input type="range" class="range" data-g="sliders" data-k="bgmVol" min="0" max="100" data-fmt="pct"><output></output></div>
+                </div>
+                <div class="row">
+                    <div class="row-text"><span class="row-label">Efectos</span><span class="row-desc">Clics de la interfaz y sonidos de juego.</span></div>
+                    <div class="row-ctl"><input type="range" class="range" data-g="sliders" data-k="sfxVol" min="0" max="100" data-fmt="pct"><output></output></div>
+                </div>
+                <div class="row">
+                    <div class="row-text"><span class="row-label">Velocidad de la música</span><span class="row-desc">Cambia el ritmo de todas las canciones.</span></div>
+                    <div class="row-ctl"><input type="range" class="range" data-g="sliders" data-k="musicSpeed" min="0.5" max="2" step="0.05" data-fmt="x2"><output></output></div>
+                </div>
+            </div>
+
+            <!-- ============ TÁCTIL ============ -->
+            <div class="pane" id="pane-tactil">
+                <h2 class="pane-title">Táctil</h2>
+                <p class="pane-note">Solo se usa en pantallas táctiles. En PC puedes ignorarlo.</p>
+                <div class="row">
+                    <div class="row-text"><span class="row-label">Vibración</span><span class="row-desc">Vibra el dispositivo al acertar una nota.</span></div>
+                    <button type="button" class="switch" data-g="toggles" data-k="btnVibration" role="switch" aria-label="Vibración"></button>
+                </div>
+                <div class="row">
+                    <div class="row-text"><span class="row-label">Tamaño de los botones</span><span class="row-desc">Área de toque de cada pista.</span></div>
+                    <div class="row-ctl"><input type="range" class="range" data-g="sliders" data-k="touchSize" min="80" max="140" step="5" data-fmt="pct"><output></output></div>
+                </div>
+                <div class="row">
+                    <div class="row-text"><span class="row-label">Opacidad de los botones</span><span class="row-desc">Transparencia de los receptores.</span></div>
+                    <div class="row-ctl"><input type="range" class="range" data-g="sliders" data-k="touchOpacity" min="20" max="100" step="5" data-fmt="pct"><output></output></div>
+                </div>
+            </div>
+
+            <!-- ============ SISTEMA ============ -->
+            <div class="pane" id="pane-sistema">
+                <h2 class="pane-title">Sistema</h2>
+                <div class="row">
+                    <div class="row-text"><span class="row-label">Guardado local</span><span class="row-desc">Si lo apagas, los ajustes se pierden al recargar.</span></div>
+                    <button type="button" class="switch" data-g="toggles" data-k="btnStorage" role="switch" aria-label="Guardado local"></button>
+                </div>
+                <div class="row">
+                    <div class="row-text"><span class="row-label">Restablecer ajustes</span><span class="row-desc">Vuelve a los valores de fábrica. No borra tus canciones ni tu perfil.</span></div>
+                    <button type="button" class="btn btn-danger" id="btnReset"><i data-ic="refresh"></i>Restablecer</button>
+                </div>
+            </div>
+        </section>
+
+        <aside class="preview-col">
+            <div class="preview panel" id="preview" data-style="arrows">
+                <div class="preview-head"><span>Vista previa</span><span class="chip" id="previewStyleName">Flechas</span></div>
+                <div class="pv-lanes" id="pvLanes">
+                    <div class="pv-lane" style="--c:var(--lane-0)"><div class="pv-rec" data-lane="0"><b></b></div><i class="pv-note" style="--d:0s"></i><i class="pv-note" style="--d:1.3s"></i></div>
+                    <div class="pv-lane" style="--c:var(--lane-1)"><div class="pv-rec" data-lane="1"><b></b></div><i class="pv-note" style="--d:0.45s"></i><i class="pv-note" style="--d:1.9s"></i></div>
+                    <div class="pv-lane" style="--c:var(--lane-2)"><div class="pv-rec" data-lane="2"><b></b></div><i class="pv-note" style="--d:0.9s"></i><i class="pv-note" style="--d:2.1s"></i></div>
+                    <div class="pv-lane" style="--c:var(--lane-3)"><div class="pv-rec" data-lane="3"><b></b></div><i class="pv-note" style="--d:0.2s"></i><i class="pv-note" style="--d:1.6s"></i></div>
+                </div>
+                <p class="preview-hint">Pulsa tus teclas para probarlas.</p>
+            </div>
+        </aside>
+    </main>
+
+    <div class="modal-backdrop" id="resetModal">
+        <div class="modal">
+            <h3 class="modal-title">¿Restablecer los ajustes?</h3>
+            <p class="modal-text">Se perderán tus teclas, velocidad, audio y estilo de notas.</p>
+            <div class="modal-actions">
+                <button type="button" class="btn" id="resetCancel">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="resetConfirm">Restablecer</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+{
+  "nombre": "Laboratorio de Mecánicas",
+  "creador": "OKAOs Team",
+  "version": "1.0.0",
+  "descripcion": "Mod de ejemplo que enseña todas las mecánicas del juego: notas que se mantienen, rebotes, cambios de carril, bombas, cambios de velocidad, letras en pantalla y dos mecánicas propias (Pulso y Fantasma) hechas con un script. Úsalo como plantilla para crear el tuyo.",
+  "etiquetas": ["Ejemplo", "Mecánicas", "Plantilla"],
+  "dificultades": ["Lab"],
+
+  "portada": "assets/cover.jpg",
+  "fondo": "assets/fondo.jpg",
+  "video": "assets/demo.mp4",
+  "bgm": "assets/demo.ogg",
+
+  "mecanicas": [
+    "hold",
+    "rebote",
+    "cambio",
+    "bomba",
+    "velocidad",
+    "texto",
+    "fantasma",
+    {
+      "id": "pulso",
+      "nombre": "Pulso",
+      "descripcion": "La nota late al ritmo de la música. Se golpea como una nota normal.",
+      "icono": "assets/icons/pulso.svg"
+    }
+  ],
+
+  "archivos": [],
+  "canciones": [{ "archivo": "demo.oks" }],
+  "scripts": ["mecanicas.js"],
+  "css": ["pulso.css"],
+
+  "notas": [
+    "1.0.0: primera versión con una canción de demostración de cada mecánica."
+  ]
+}

@@ -1,0 +1,11 @@
+/* Estilo de la mecánica "pulso" (clase .tag-pulso la pone el motor automáticamente) */
+@keyframes modPulso {
+    0%, 100% { scale: 1; }
+    50% { scale: 1.28; }
+}
+.note.tag-pulso .arrow-icon {
+    animation: modPulso 0.5s ease-in-out infinite;
+    animation-delay: var(--pulso-delay, 0s);
+    background-color: #ff2a74 !important;
+    filter: drop-shadow(0 0 12px #ff2a74) !important;
+}

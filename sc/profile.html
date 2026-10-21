@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - OKAOs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpg" href="../img/logo.jpg">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/profile.css">
+    <script src="../js/mods.js" data-page="profile" data-scripts="ui,okx,songs,profile"></script>
+</head>
+<body oncontextmenu="return false;">
+
+    <img class="bg-layer show" src="../img/fn/f3.jpg" alt="">
+    <div class="bg-shade"></div>
+
+    <header class="topbar">
+        <a href="../index.html" class="brand">OKAOs</a>
+        <nav class="menu">
+            <a href="../index.html" class="menu-btn menu-btn-home" id="backBtn"><i data-ic="home"></i>Inicio</a>
+            <span class="menu-btn active"><i data-ic="user"></i>Perfil</span>
+            <button type="button" class="menu-btn" id="settingsBtn"><i data-ic="edit"></i>Editar perfil</button>
+        </nav>
+    </header>
+
+    <main class="profile-wrapper">
+        <aside class="identity">
+            <div class="main-card panel">
+                <div class="banner-container" id="profileBanner"><div class="banner-overlay"></div></div>
+                <div class="user-header-info">
+                    <div class="avatar-row">
+                        <div class="avatar-square-frame"><img src="../img/profiles/default.png" id="profileAvatar" alt="Avatar"></div>
+                        <div class="user-titles">
+                            <div class="user-name" id="userNameDisplay">User</div>
+                            <div class="badges-group" id="badgesGroup"></div>
+                            <div class="country-flag-row">
+                                <img src="https://flagcdn.com/w40/mx.png" id="countryFlagImg" alt="Bandera">
+                                <span id="countryNameDisplay">México</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="level-container">
+                        <div class="hexagon-level-wrapper">
+                            <svg viewBox="0 0 100 100"><polygon points="50,4 92,25 92,75 50,96 8,75 8,25" fill="#141416" stroke="#ffcc00" stroke-width="5" stroke-linejoin="round"/></svg>
+                            <span class="hexagon-level-text" id="levelText">1</span>
+                        </div>
+                        <div class="level-bar-wrap">
+                            <div class="level-bar-bg"><div class="level-bar-fill" id="levelBarFill" style="width: 0%;"></div></div>
+                            <div class="level-subtext"><span>Nivel</span><span id="levelXpText">0/500 XP</span></div>
+                        </div>
+                    </div>
+
+                    <div class="rankings-row">
+                        <div class="rank-item"><span class="rank-label">Mejor rango</span><span class="rank-value" id="rankValueBest">—</span></div>
+                        <div class="rank-item"><span class="rank-label">Canciones jugadas</span><span class="rank-value" id="rankValueSongs">0</span></div>
+                    </div>
+
+                    <div class="ranks-summary-grid">
+                        <div class="rank-box"><img src="../img/assets/ranks/sss.png" class="rank-icon-img" alt="SSS"><span class="rank-count" id="countSSS">0</span></div>
+                        <div class="rank-box"><img src="../img/assets/ranks/ss.png" class="rank-icon-img" alt="SS"><span class="rank-count" id="countSS">0</span></div>
+                        <div class="rank-box"><img src="../img/assets/ranks/s.png" class="rank-icon-img" alt="S"><span class="rank-count" id="countS">0</span></div>
+                        <div class="rank-box"><img src="../img/assets/ranks/a.png" class="rank-icon-img" alt="A"><span class="rank-count" id="countA">0</span></div>
+                        <div class="rank-box"><img src="../img/assets/ranks/b.png" class="rank-icon-img" alt="B"><span class="rank-count" id="countB">0</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-card panel">
+                <div class="section-title"><i data-ic="chart"></i>Estadísticas</div>
+                <div class="stats-list">
+                    <div class="stat-row"><span class="stat-txt-label">Partidas jugadas</span><span class="stat-txt-val" id="statPlays">0</span></div>
+                    <div class="stat-row"><span class="stat-txt-label">Puntuación total</span><span class="stat-txt-val" id="statTotalScore">0</span></div>
+                    <div class="stat-row"><span class="stat-txt-label">Precisión media</span><span class="stat-txt-val" id="statAccuracy">0%</span></div>
+                    <div class="stat-row"><span class="stat-txt-label">Combo máximo</span><span class="stat-txt-val" id="statMaxCombo">0x</span></div>
+                    <div class="stat-row"><span class="stat-txt-label">Hits totales</span><span class="stat-txt-val" id="statHits">0</span></div>
+                    <div class="stat-row"><span class="stat-txt-label">Canciones con récord</span><span class="stat-txt-val" id="statSongsRecord">0</span></div>
+                </div>
+            </div>
+        </aside>
+
+        <section class="content-col">
+            <div class="section-card panel">
+                <div class="section-title"><i data-ic="trophy"></i><span id="medalsCountText">Medallas (0/10)</span></div>
+                <div class="medals-grid" id="medalsGrid"></div>
+            </div>
+            <div class="section-card panel">
+                <div class="section-title"><i data-ic="star"></i>Mejores puntuaciones</div>
+                <div class="top-ranks-list" id="topRanksList"></div>
+            </div>
+            <div class="section-card panel">
+                <div class="section-title"><i data-ic="heart"></i>Música favorita</div>
+                <div class="fav-songs-display" id="favSongsDisplay"></div>
+            </div>
+        </section>
+    </main>
+
+    <div class="modal-backdrop" id="medalModal">
+        <div class="modal-content medal-modal-box">
+            <div class="modal-title" id="medalModalTitle"></div>
+            <div class="medal-modal-img-wrap" id="medalModalImgWrap"></div>
+            <p class="medal-modal-desc" id="medalModalDesc"></p>
+            <span class="medal-modal-status" id="medalModalStatus"></span>
+            <div class="modal-actions">
+                <button class="btn-action btn-cancel" id="closeMedalModalBtn">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-backdrop" id="editModal">
+        <div class="modal-content">
+            <div class="modal-title">Editar Perfil</div>
+            
+            <div class="form-group">
+                <label>Nombre de Usuario</label>
+                <input type="text" id="inputUsername" class="form-control" placeholder="Escribe tu usuario">
+            </div>
+
+            <div class="form-group">
+                <label>Región / País</label>
+                <select id="selectCountry" class="form-control">
+                    <option value="mx|México">México</option>
+                    <option value="es|España">España</option>
+                    <option value="ar|Argentina">Argentina</option>
+                    <option value="cl|Chile">Chile</option>
+                    <option value="co|Colombia">Colombia</option>
+                    <option value="us|Estados Unidos">Estados Unidos</option>
+                    <option value="pe|Perú">Perú</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Foto de Perfil (Galería)</label>
+                <label class="file-input-btn" for="inputAvatarFile">
+                    <span id="avatarFileName">Seleccionar imagen...</span>
+                </label>
+                <input type="file" id="inputAvatarFile" accept="image/*" style="display:none;">
+                <div class="preview-box avatar-prev" id="avatarPreviewContainer" style="display:none;">
+                    <img id="avatarPreviewImg" src="" alt="Vista previa avatar">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Imagen de Banner (Galería)</label>
+                <label class="file-input-btn" for="inputBannerFile">
+                    <span id="bannerFileName">Seleccionar imagen...</span>
+                </label>
+                <input type="file" id="inputBannerFile" accept="image/*" style="display:none;">
+                <div class="preview-box" id="bannerPreviewContainer" style="display:none;">
+                    <img id="bannerPreviewImg" src="" alt="Vista previa banner">
+                </div>
+            </div>
+
+            <div class="modal-section-title">Etiquetas Visibles</div>
+            <div class="form-group">
+                <div class="tag-toggle-list">
+                    <label class="tag-toggle-item"><input type="checkbox" id="tagToggleVip"><span class="badge-pill vip">VIP</span></label>
+                    <label class="tag-toggle-item"><input type="checkbox" id="tagToggleSupporter"><span class="badge-pill">SUPPORTER</span></label>
+                    <label class="tag-toggle-item"><input type="checkbox" id="tagToggleDev"><span class="badge-pill dev">DEV</span></label>
+                </div>
+            </div>
+
+            <div class="modal-section-title">Añadir Música Favorita</div>
+            <div class="form-group">
+                <label>Buscador (máximo 3 canciones)</label>
+                <input type="text" id="favSongSearch" class="form-control" placeholder="Buscar canción...">
+                <div class="fav-search-results" id="favSearchResults"></div>
+                <div class="fav-selected-list" id="favSelectedList"></div>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn-action btn-cancel" id="closeModalBtn">Cancelar</button>
+                <button class="btn-action btn-save" id="saveProfileBtn">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
