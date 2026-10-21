@@ -1,0 +1,177 @@
+const bgMusic = new Audio(OKAOS.asset('sounds/music.ogg'));
+bgMusic.loop = true;
+
+const clickSound = new Audio(OKAOS.asset('sounds/click.mp3'));
+const click2Sound = new Audio(OKAOS.asset('sounds/click2.ogg'));
+
+function tryPlayBgMusic() {
+    bgMusic.play().catch(() => {});
+}
+
+window.addEventListener('click', tryPlayBgMusic, { once: true });
+window.addEventListener('keydown', tryPlayBgMusic, { once: true });
+
+function playClick2Sound() {
+    click2Sound.currentTime = 0;
+    click2Sound.play().catch(() => {});
+}
+
+function fadeAllAudio(duration = 800) {
+    const audioList = [bgMusic, clickSound, click2Sound];
+    const steps = 20;
+    const intervalTime = duration / steps;
+    let currentStep = 0;
+
+    const fadeInterval = setInterval(() => {
+        currentStep++;
+        const factor = Math.max(0, 1 - currentStep / steps);
+
+        audioList.forEach(audio => {
+            if (audio && !audio.paused) {
+                audio.volume = factor;
+            }
+        });
+
+        if (currentStep >= steps) {
+            clearInterval(fadeInterval);
+            audioList.forEach(audio => {
+                if (audio) {
+                    audio.pause();
+                }
+            });
+        }
+    }, intervalTime);
+}
+
+document.querySelectorAll('a, button, .rhombus-btn, .modal-close').forEach(element => {
+    const targetUrl = element.getAttribute('href');
+    if (targetUrl && targetUrl !== '#' && !targetUrl.startsWith('javascript:')) {
+        element.addEventListener('click', (e) => {
+            e.preventDefault();
+            const isExternal = element.getAttribute('target') === '_blank';
+            
+            if (element.id === 'btnPlay') {
+                clickSound.currentTime = 0;
+                clickSound.play().catch(() => {});
+            } else {
+                playClick2Sound();
+            }
+
+            fadeAllAudio(1000);
+
+            setTimeout(() => {
+                if (isExternal) {
+                    window.open(targetUrl, '_blank');
+                } else {
+                    window.location.href = targetUrl;
+                }
+            }, 1000);
+        });
+    } else {
+        if (element.id !== 'btnPlay') {
+            element.addEventListener('click', () => {
+                playClick2Sound();
+            });
+        }
+    }
+});
+
+window.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && (e.key === 's' || e.key === 'u')) {
+        e.preventDefault();
+    }
+});
+
+const modal = document.getElementById('controlsModal');
+const openBtn = document.getElementById('controlsBtn');
+const closeModal = document.getElementById('closeModal');
+
+closeModal.addEventListener('click', () => {
+    modal.classList.remove('active');
+});
+
+const versionModal = document.getElementById('versionModal');
+const versionBtn = document.getElementById('versionBtn');
+const closeVersionBtn = document.getElementById('closeVersionBtn');
+
+versionBtn.addEventListener('click', () => {
+    versionModal.classList.add('active');
+});
+
+closeVersionBtn.addEventListener('click', () => {
+    versionModal.classList.remove('active');
+});
+
+/* ---------- controles: se muestran las teclas del usuario ---------- */
+const keysContainer = document.getElementById('keysContainer');
+const LANE_COLORS = ['var(--lane-0, #ff2a74)', 'var(--lane-1, #00f2fe)', 'var(--lane-2, #39ff14)', 'var(--lane-3, #ffb800)'];
+
+function renderUserKeys() {
+    const keys = OKUI.settings.read().keys;
+    keysContainer.innerHTML = ['key1', 'key2', 'key3', 'key4'].map((id, i) =>
+        `<div class="key-box" data-key="${OKUI.esc(keys[id])}" style="--lane:${LANE_COLORS[i]}">${OKUI.keyLabel(keys[id])}</div>`
+    ).join('');
+}
+
+function keyBoxFor(e) {
+    const name = OKUI.normalizeKey(e);
+    return Array.prototype.find.call(keysContainer.querySelectorAll('.key-box'), b => b.dataset.key === name);
+}
+
+function openControls() {
+    renderUserKeys();
+    modal.classList.add('active');
+}
+
+openBtn.addEventListener('click', openControls);
+
+window.addEventListener('keydown', (e) => {
+    if (modal.classList.contains('active')) {
+        const box = keyBoxFor(e);
+        if (box) { e.preventDefault(); box.classList.add('active-key'); }
+        if (e.key === 'Escape') modal.classList.remove('active');
+    }
+});
+
+window.addEventListener('keyup', (e) => {
+    if (modal.classList.contains('active')) {
+        const box = keyBoxFor(e);
+        if (box) box.classList.remove('active-key');
+    }
+});
+
+/* El atajo "Controles" (configurable en Ajustes) lo emite ui.js */
+window.addEventListener('okaos:controls', openControls);
+
+function executeChainBounce() {
+    const sequence = [
+        document.getElementById('btnPlay'),
+        document.getElementById('btnCanciones'),
+        document.getElementById('btnPerfil'),
+        document.getElementById('btnAjustes')
+    ];
+    
+    sequence.forEach((btn, index) => {
+        setTimeout(() => {
+            if (btn) {
+                btn.classList.add('bounce-active');
+                btn.addEventListener('animationend', () => {
+                    btn.classList.remove('bounce-active');
+                }, { once: true });
+            }
+        }, index * 250);
+    });
+}
+
+function executeRhombusEntrance() {
+    const rhombusBtns = document.querySelectorAll('.rhombus-btn');
+    rhombusBtns.forEach((btn, index) => {
+        setTimeout(() => {
+            btn.classList.add('entrance-active');
+        }, index * 120);
+    });
+}
+
+setTimeout(executeChainBounce, 300);
+setTimeout(executeRhombusEntrance, 600);
+setInterval(executeChainBounce, 1 * 60 * 1000);
