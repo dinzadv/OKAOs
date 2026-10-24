@@ -1,0 +1,23 @@
+/* play.html: iconos SVG y extras (mecánicas, filtro de mod) */
+.menu-btn { display: inline-flex; align-items: center; gap: 6px; }
+.action-sub-btn, .play-btn, .full-stats-close { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.full-stats-close .ic { width: 18px; height: 18px; stroke-width: 2.4; }
+.play-btn .ic { width: 1.1em; height: 1.1em; }
+.track-mech { display: flex; gap: 3px; flex-shrink: 0; }
+.track-mech img { width: clamp(14px, 1.3vw, 19px); height: clamp(14px, 1.3vw, 19px); object-fit: contain; }
+.track-badge { font-family: 'Fredoka', sans-serif; font-size: 0.62rem; font-weight: 700; padding: 1px 7px; border-radius: 100px; background: rgba(255,204,0,0.2); color: #ffcc00; text-transform: uppercase; letter-spacing: 0.5px; align-self: flex-start; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.track.selected .track-badge { background: rgba(0,0,0,0.15); color: #141414; }
+.play-mech { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; min-height: 0; }
+.play-mech img { width: 26px; height: 26px; object-fit: contain; background: rgba(0,0,0,0.4); border-radius: 50%; padding: 4px; }
+.mod-filter { position: fixed; top: calc(clamp(10px,2vh,24px) + clamp(40px,7vh,60px) + 6px); left: 50%; transform: translateX(-50%); z-index: 20; display: flex; align-items: center; gap: 8px; font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 0.85rem; color: #fff; background: rgba(20,20,22,0.8); border: 1px solid rgba(255,204,0,0.5); border-radius: 100px; padding: 5px 6px 5px 14px; }
+.mod-filter[hidden] { display: none; }
+.mod-filter button { display: grid; place-items: center; width: 24px; height: 24px; border: 0; border-radius: 50%; background: rgba(255,255,255,0.14); color: #fff; cursor: pointer; }
+.mod-filter button:hover { background: #ff3366; }
+.mod-filter .ic { width: 14px; height: 14px; stroke-width: 2.6; }
+.empty-play { margin: auto; text-align: center; font-family: 'Fredoka', sans-serif; color: #fff; max-width: 320px; }
+.empty-play p { color: rgba(255,255,255,0.65); margin: 6px 0 14px; }
+.empty-play a { display: inline-block; font-weight: 700; text-decoration: none; color: #141414; background: #ffcc00; border-radius: 12px; padding: 10px 18px; }
+
+/* ---------- video de fondo nítido (igual que en la partida) ---------- */
+#bgVideo, video#bg-element { filter: brightness(0.66) saturate(1.1); transform: none; object-fit: cover; }
+body.has-video .bg-shade { background: radial-gradient(ellipse at 60% 40%, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.42) 100%); }

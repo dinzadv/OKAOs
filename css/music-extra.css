@@ -1,0 +1,18 @@
+/* music.html: botón de subida .okx, filtros de origen y zona de arrastre */
+.menu-btn { display: inline-flex; align-items: center; gap: 6px; border: 0; background: transparent; }
+.menu-btn-add { font-size: clamp(0.7rem, 1vw, 0.9rem); }
+.source-tabs { display: flex; gap: 6px; margin: 0 0 10px; flex-wrap: wrap; }
+.src-tab { display: inline-flex; align-items: center; gap: 6px; font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 0.8rem; color: rgba(255,255,255,0.78); background: rgba(20,20,22,0.55); border: 1px solid rgba(255,255,255,0.14); border-radius: 100px; padding: 5px 13px; cursor: pointer; transition: background .15s, color .15s; }
+.src-tab:hover, .src-tab.active { background: #ffcc00; color: #141414; border-color: transparent; }
+.phone-action-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.drop-overlay { position: fixed; inset: 0; z-index: 800; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,0.72); backdrop-filter: blur(6px); }
+.drop-overlay.show { display: flex; }
+.drop-overlay > div { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 46px 64px; border: 3px dashed #ffcc00; border-radius: 28px; color: #fff; font-family: 'Fredoka', sans-serif; }
+.drop-overlay .ic { width: 52px; height: 52px; color: #ffcc00; }
+.drop-overlay b { font-size: 1.5rem; }
+.drop-overlay span { color: rgba(255,255,255,0.65); }
+.upload-toast { font-family: 'Fredoka', sans-serif; }
+
+/* ---------- video de fondo nítido (igual que en la partida) ---------- */
+#bgVideo, video#bg-element { filter: brightness(0.66) saturate(1.1); transform: none; object-fit: cover; }
+body.has-video .bg-shade { background: radial-gradient(ellipse at 60% 40%, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.42) 100%); }
